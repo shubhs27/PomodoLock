@@ -1,0 +1,250 @@
+/* popup/popup.css */
+:root {
+  --bg-primary: #18181b;
+  --bg-secondary: #27272a;
+  --panel-bg: #2d2d33;
+  --accent-color: #ef4444;
+  --accent-hover: #dc2626;
+  --timer-active: #22c55e;
+  --timer-inactive: #64748b;
+  --success-color: #22c55e;
+  --success-hover: #16a34a;
+  --delete-color: #ef4444;
+  --delete-hover: #dc2626;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #3f3f46;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  width: 300px;
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+}
+
+h2,
+h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 16px;
+  background-color: var(--panel-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 18px;
+}
+
+.timer {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 6px 0 18px;
+  color: var(--timer-inactive);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.timer-active {
+  color: var(--timer-active);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background-color: #3f3f46;
+  color: #a1a1aa;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sites-section {
+  background-color: var(--panel-bg);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+.site-list {
+  max-height: 140px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--bg-secondary);
+  margin-bottom: 12px;
+}
+
+.site-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.site-list::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.site-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 2px;
+}
+
+.site-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.site-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.site-item:last-child {
+  border-bottom: none;
+}
+
+.site-input {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+input::placeholder {
+  color: #71717a;
+}
+
+.add-button {
+  background-color: var(--success-color);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.add-button:hover {
+  background-color: var(--success-hover);
+}
+
+.delete-button {
+  background-color: transparent;
+  color: var(--delete-color);
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.delete-button:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--delete-hover);
+}
+
+/* Modern pulse animation for active timer */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive design for small screens */
+@media (max-width: 360px) {
+  .timer {
+    font-size: 42px;
+  }
+
+  button {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,39 @@
+<!-- blocked/blocked.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stay Focused - PomodoLock</title>
+    <link rel="stylesheet" href="blocked.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <img src="../icons/icon128.png" alt="PomodoLock" class="logo" />
+      <h1>Focus Mode Active</h1>
+      <div class="message">
+        You're currently in a Pomodoro focus session. This site has been
+        temporarily blocked to help you lock in on your task.
+      </div>
+      <div class="timer" id="timer">--:--</div>
+      <div class="message">
+        <div class="quotes-container">
+          <p class="quote">
+            You clearly don't know who you're talking to, so let me clue you
+            in... I am the one who blocks.
+          </p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button id="returnBtn" class="secondary">Go Back</button>
+        <button id="overrideBtn">End Session</button>
+      </div>
+    </div>
+
+    <script src="blocked.js"></script>
+  </body>
+</html>
