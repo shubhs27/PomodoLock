@@ -3,7 +3,7 @@
   "name": "PomodoLock",
   "version": "1.0.0",
   "description": "Block distracting websites during Pomodoro focus sessions to lock in on your task",
-  "permissions": ["storage", "webNavigation", "tabs", "alarms"],
+  "permissions": ["storage", "webNavigation", "alarms"],
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup/popup.html",
