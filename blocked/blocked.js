@@ -21,7 +21,6 @@ function updateTimer() {
 document.addEventListener("DOMContentLoaded", function () {
   updateTimer();
 
-  // Set up button listeners
   document.getElementById("returnBtn").addEventListener("click", function () {
     history.back();
   });

@@ -35,7 +35,7 @@ PomodoLock uses a dual-approach strategy to help you stay focused:
 
 ### From Chrome Web Store
 
-Install PomodoLock directly from the [Chrome Web Store](https://chrome.google.com/webstore/detail/)
+Install PomodoLock directly from the [Chrome Web Store](https://chrome.google.com/webstore/detail/mapddbpaaaachoidpbolhpckhillhbpj)
 
 ### Manual Installation
 

@@ -1,9 +1,7 @@
-// background.js
-// Initialize default values
 chrome.runtime.onInstalled.addListener(function () {
   chrome.storage.local.set({
     timerRunning: false,
-    timeLeft: 25 * 60, // 25 minutes in seconds
+    timeLeft: 25 * 60, // 25 mins
     endTime: 0,
     blockedSites: [
       "instagram.com",
@@ -25,7 +23,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   }
 });
 
-// Set up alarms for timer
 function startTimer() {
   chrome.storage.local.get(["timeLeft"], function (result) {
     const timeLeft = result.timeLeft || 25 * 60;
@@ -36,12 +33,11 @@ function startTimer() {
       endTime: endTime,
     });
 
-    // Create an alarm that fires each second
-    chrome.alarms.create("pomodoroTick", { periodInMinutes: 1 / 60 });
+    chrome.alarms.create("pomodoroTick", { periodInMinutes: 1 / 60 }); // Alarm triggers each second
 
-    // Create a temporary badge to show timer is running
+    // Temp badge to show timer is running
     chrome.action.setBadgeText({ text: "🔒" });
-    chrome.action.setBadgeBackgroundColor({ color: "#d32f2f" }); // Darker red
+    chrome.action.setBadgeBackgroundColor({ color: "#d32f2f" });
   });
 }
 
@@ -63,14 +59,13 @@ function resetTimer() {
   });
 }
 
-// Handle alarm events (timer ticks)
+// Handle alarm timer ticks
 chrome.alarms.onAlarm.addListener(function (alarm) {
   if (alarm.name === "pomodoroTick") {
     updateTimer();
   }
 });
 
-// Update timer on tick
 function updateTimer() {
   chrome.storage.local.get(["timerRunning", "endTime"], function (result) {
     if (!result.timerRunning) return;
@@ -78,7 +73,6 @@ function updateTimer() {
     const endTime = result.endTime || 0;
     const timeLeft = Math.max(0, Math.round((endTime - Date.now()) / 1000));
 
-    // Update storage
     chrome.storage.local.set({ timeLeft: timeLeft });
 
     // Send message to popup to update UI
@@ -87,7 +81,7 @@ function updateTimer() {
       timeLeft: timeLeft,
     });
 
-    // Update badge with minutes:seconds format when less than 5 minutes
+    // Update badge with min:sec format when less than 5 mins
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
 
@@ -99,21 +93,19 @@ function updateTimer() {
       chrome.action.setBadgeText({ text: `${minutes}m` });
     }
 
-    // Make badge red when time is almost up (less than 2 minutes)
+    // Make badge red when time is less than 2 mins
     if (minutes < 2) {
       chrome.action.setBadgeBackgroundColor({ color: "#b71c1c" });
     } else {
       chrome.action.setBadgeBackgroundColor({ color: "#d32f2f" });
     }
 
-    // Check if timer has finished
     if (timeLeft <= 0) {
       timerFinished();
     }
   });
 }
 
-// Handle timer completion
 function timerFinished() {
   chrome.alarms.clear("pomodoroTick");
 
@@ -124,9 +116,9 @@ function timerFinished() {
   });
 
   chrome.action.setBadgeText({ text: "✓" });
-  chrome.action.setBadgeBackgroundColor({ color: "#4fd364" }); // Success color
+  chrome.action.setBadgeBackgroundColor({ color: "#4fd364" });
 
-  // Show simple timer completion message
+  // Show timer completion message
   chrome.tabs.create({
     url: chrome.runtime.getURL("completed/completed.html"),
   });
@@ -145,12 +137,12 @@ chrome.webNavigation.onBeforeNavigate.addListener(function (details) {
     const url = new URL(details.url);
     const hostname = url.hostname;
 
-    // Check if the site should be blocked
+    // Check if site should be blocked
     const blockedSites = result.blockedSites || [];
     const shouldBlock = blockedSites.some((site) => hostname.includes(site));
 
     if (shouldBlock) {
-      // Redirect to a block page with updated path
+      // Redirect to block page with updated path
       chrome.tabs.update(details.tabId, {
         url: chrome.runtime.getURL("blocked/blocked.html"),
       });
